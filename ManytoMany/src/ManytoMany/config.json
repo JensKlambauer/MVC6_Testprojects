@@ -4,7 +4,7 @@
 		},		
 		"Data": {
 				"DefaultConnection": {
-					"ConnectionString": "Server=.\\SQLEXPRESS;Database=MvcEf7;Trusted_Connection=True;MultipleActiveResultSets=True;"
+					"ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=Mvc6Ef7;Trusted_Connection=True;MultipleActiveResultSets=True;"
 				}
 		}
 }
