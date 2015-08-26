@@ -68,7 +68,7 @@ namespace ManytoMany.Controller
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([Bind("Id,Name")] PersonViewModel model, params string[] selectedPhotos)
         {
-            var pers = await this.dbContext.Set<Person>().Include(f => f.PersonPhotos).FirstAsync(p => p.Id == model.Id);
+            var pers = await this.dbContext.Persons.Include(f => f.PersonPhotos).AsNoTracking().FirstAsync(p => p.Id == model.Id);
             if (pers == null)
             {
                 return this.HttpNotFound();
@@ -83,7 +83,7 @@ namespace ManytoMany.Controller
 
                 selectedPhotos = selectedPhotos ?? new string[] { };
 
-                var firstOrDefault = this.dbContext.Persons.FirstOrDefault(p => p.Id == model.Id);
+                var firstOrDefault = this.dbContext.Persons.Include(f => f.PersonPhotos).AsNoTracking().FirstOrDefault(p => p.Id == model.Id);
                 if (firstOrDefault != null)
                 {
                     // Remove all Photos from Person
@@ -95,8 +95,6 @@ namespace ManytoMany.Controller
                     }
                 }
                 this.dbContext.SaveChanges();
-                // Relationships in DB deleted, but not in the DbContext
-                // -> UnitTest failed
 
                 var newFotos = this.dbContext.Set<Photo>().Where(p => selectedPhotos.Any(n => n == p.Name));
                 foreach (var foto in newFotos)
@@ -105,11 +103,6 @@ namespace ManytoMany.Controller
                     this.dbContext.Entry(personPhoto).State = EntityState.Added;
                 }
                 this.dbContext.SaveChanges();
-
-                ////this.dbContext.Set<Person>().Where(p => p.Id == model.Id).Load();
-                ////var pers2 = this.dbContext.Set<Person>().Where(p => p.PersonPhotos.Any(f => f.PersonId == model.Id)).ToList();
-                var pers2 = this.dbContext.Set<Person>().Include(pp => pp.PersonPhotos).ToList();
-                // EF7-Problem look in Collection PersonPhotos
 
                 return this.RedirectToAction("Index");
             }

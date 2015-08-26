@@ -54,7 +54,7 @@ namespace ManyToMany.Test
             CreateTestPersonWithPhotos(dbContext);
 
             // Act
-            var result = dbContext.Persons.Include(f => f.PersonPhotos).First(p => p.Id == 1);
+            var result = dbContext.Persons.Include(f => f.PersonPhotos).AsNoTracking().First(p => p.Id == 1);
 
             // Arrange
             var viewResult = Assert.IsType<Person>(result);
@@ -64,23 +64,23 @@ namespace ManyToMany.Test
             var viewModel = Assert.IsType<List<PersonPhoto>>(viewResult.PersonPhotos);
             Assert.Equal(2, viewModel.Count);
 
-            // Edit Person -> Remove all Photos from Person
-            var first = dbContext.Persons.First(p => p.Id == 1);
+            // Edit Person -> Remove all Photos from Person, without AsNoTracking()
+            var first = dbContext.Persons.Include(f => f.PersonPhotos).First(p => p.Id == 1);
 
-            first.PersonPhotos.ToList().ForEach(pp => dbContext.Entry(pp).State = EntityState.Deleted);
-            ////if (first != null)
-            ////{
-            ////    var personPhotos = first.PersonPhotos.ToList();
-            ////    foreach (var personPhoto in personPhotos)
-            ////    {
-            ////        ////dbContext.Entry(personPhoto).State = EntityState.Deleted;
-            ////        dbContext.Remove(personPhoto);
-            ////    }
-            ////}
+            ////first.PersonPhotos.ToList().ForEach(pp => dbContext.Entry(pp).State = EntityState.Deleted);
+            if (first != null)
+            {
+                var personPhotos = first.PersonPhotos.ToList();
+                foreach (var personPhoto in personPhotos)
+                {
+                    dbContext.Entry(personPhoto).State = EntityState.Deleted;
+                    ////dbContext.Remove(personPhoto);
+                }
+            }
             dbContext.SaveChanges();
 
-            // Read Person
-            var pers = dbContext.Persons.First(p => p.Id == 1);
+            // Read Person, only with AsNoTracking() passed the Test
+            var pers = dbContext.Persons.Include(f => f.PersonPhotos).AsNoTracking().First(p => p.Id == 1);
             Assert.Equal(0, pers.PersonPhotos.Count);
         }
 
