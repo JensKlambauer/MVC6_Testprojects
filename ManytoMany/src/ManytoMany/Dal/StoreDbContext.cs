@@ -28,8 +28,8 @@ namespace ManytoMany.Dal
             builder.Entity<PersonPhoto>(e =>
             {
                 e.Key(x => new { x.PhotoId, x.PersonId });
-                e.Reference(a => a.Person).InverseCollection(p => p.PersonPhotos).ForeignKey(d => d.PersonId);
-                e.Reference(a => a.Photo).InverseCollection(p => p.PersonPhotos).ForeignKey(d => d.PhotoId);
+                ////e.Reference(a => a.Person).InverseCollection(p => p.PersonPhotos).ForeignKey(d => d.PersonId);
+                ////e.Reference(a => a.Photo).InverseCollection(p => p.PersonPhotos).ForeignKey(d => d.PhotoId);
             });
 
             base.OnModelCreating(builder);

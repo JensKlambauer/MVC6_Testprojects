@@ -66,16 +66,9 @@ namespace ManyToMany.Test
 
             // Edit Person -> Remove all Photos from Person, without AsNoTracking()
             var first = dbContext.Persons.Include(f => f.PersonPhotos).First(p => p.Id == 1);
-
-            ////first.PersonPhotos.ToList().ForEach(pp => dbContext.Entry(pp).State = EntityState.Deleted);
             if (first != null)
             {
-                var personPhotos = first.PersonPhotos.ToList();
-                foreach (var personPhoto in personPhotos)
-                {
-                    dbContext.Entry(personPhoto).State = EntityState.Deleted;
-                    ////dbContext.Remove(personPhoto);
-                }
+                first.PersonPhotos.ToList().ForEach(pp => dbContext.Entry(pp).State = EntityState.Deleted);
             }
             dbContext.SaveChanges();
 

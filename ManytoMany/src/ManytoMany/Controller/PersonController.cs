@@ -83,17 +83,9 @@ namespace ManytoMany.Controller
 
                 selectedPhotos = selectedPhotos ?? new string[] { };
 
-                var firstOrDefault = this.dbContext.Persons.Include(f => f.PersonPhotos).AsNoTracking().FirstOrDefault(p => p.Id == model.Id);
-                if (firstOrDefault != null)
-                {
-                    // Remove all Photos from Person
-                    var personPhotos = firstOrDefault.PersonPhotos.ToList();
-                    foreach (var personPhoto in personPhotos)
-                    {
-                        this.dbContext.Entry(personPhoto).State = EntityState.Deleted;
-                        ////this.dbContext.Remove(personPhoto);
-                    }
-                }
+                // Remove all Photos from Person
+                pers.PersonPhotos.ToList().ForEach(pp => dbContext.Entry(pp).State = EntityState.Deleted);
+
                 this.dbContext.SaveChanges();
 
                 var newFotos = this.dbContext.Set<Photo>().Where(p => selectedPhotos.Any(n => n == p.Name));
