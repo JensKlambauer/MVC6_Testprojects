@@ -37,7 +37,7 @@ namespace ManyToMany.Test
             // Act
             var result = dbContext.Set<Person>().Include(f => f.PersonPhotos).First(p => p.Id == 1);
 
-            // Arrange
+            // Assert
             var viewResult = Assert.IsType<Person>(result);
             Assert.NotNull(viewResult.Id);
 
@@ -56,7 +56,7 @@ namespace ManyToMany.Test
             // Act
             var result = dbContext.Persons.Include(f => f.PersonPhotos).AsNoTracking().First(p => p.Id == 1);
 
-            // Arrange
+            // Assert
             var viewResult = Assert.IsType<Person>(result);
             Assert.NotNull(viewResult.Id);
 

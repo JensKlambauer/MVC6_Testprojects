@@ -1,0 +1,10 @@
+﻿{
+	"AppSettings": {
+				"SiteTitle": "ASP.NET MVC 6 Dapper.net"
+		},		
+		"Data": {
+				"DefaultConnection": {
+					"ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=Mvc6Dapper;Trusted_Connection=True;MultipleActiveResultSets=True;"
+				}
+		}
+}

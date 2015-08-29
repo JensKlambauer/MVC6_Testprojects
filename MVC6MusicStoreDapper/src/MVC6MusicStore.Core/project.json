@@ -1,0 +1,22 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "MVC6MusicStore.Core Class Library",
+  "authors": [ "jek" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "dependencies": {
+    "Microsoft.AspNet.Mvc": "6.0.0-beta6",
+    "EntityFramework.SqlServer": "7.0.0-beta6"
+  },
+
+  "frameworks": {
+    "dnx451": {
+      "dependencies": {
+       "Dapper": "1.42.0",
+       "DapperExtensions": "1.4.4"
+      }
+    }
+  }
+}
