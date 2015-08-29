@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Hosting;
 using Microsoft.Data.Entity;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
+using Microsoft.Framework.Logging;
 using Microsoft.Framework.Runtime;
 using MVC6MusicStore.Core.DAL;
 using MVC6MusicStore.Core.Services;
 using MVC6MusicStoreDapper.DataContext;
+using Serilog;
+using ILogger = Serilog.ILogger;
 
 namespace MVC6MusicStoreDapper
 {
@@ -32,16 +36,18 @@ namespace MVC6MusicStoreDapper
             {
                 options.ConnectionString = this.Configuration.Get("Data:DefaultConnection:ConnectionString");
             });
-
-            ////services.AddSingleton(_ => this.Configuration);
+            
             services.AddInstance<IConfiguration>(this.Configuration);
             services.AddScoped<IStoreRepository, StoreRepository>();
             services.AddMvc();
+
+            // Logging
+            services.AddLogging();
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory)
         {
-            ////app.UseWelcomePage();
+            loggerfactory.AddSerilog(GetLoggerConfiguration());
 
             app.UseErrorPage()
             .UseStaticFiles()
@@ -55,6 +61,15 @@ namespace MVC6MusicStoreDapper
 
             //Populates the MusicStore sample data
             SampleData.InitializeMusicStoreDatabaseAsync(app.ApplicationServices).Wait();
+        }
+
+        private static ILogger GetLoggerConfiguration()
+        {
+            return new LoggerConfiguration()
+                        .MinimumLevel.Debug()
+                        .WriteTo.RollingFile(@"C:\Temp\DapperMVC6-{Date}.txt",outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} {Level}:{EventId} [{SourceContext}] {Message}{NewLine}{Exception}")
+                        .WriteTo.ColoredConsole()
+                        .CreateLogger();
         }
     }
 }

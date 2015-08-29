@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using MVC6MusicStore.Core.Services;
 
@@ -13,9 +14,9 @@ namespace MVC6MusicStoreDapper.Controller
             this.storeRepository = storeRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var albums = this.storeRepository.GetAllAlbumsDapper().ToList();
+            var albums = await this.storeRepository.GetAllAlbumsDapperAsync();
 
             return View();
         }

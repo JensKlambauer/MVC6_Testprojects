@@ -15,7 +15,10 @@
     "Microsoft.AspNet.Tooling.Razor": "1.0.0-beta6",
     "Microsoft.Framework.Configuration.Json": "1.0.0-beta6",
     "EntityFramework.SqlServer": "7.0.0-beta6",
-    "EntityFramework.Commands": "7.0.0-beta6"
+    "EntityFramework.Commands": "7.0.0-beta6",
+     "Microsoft.Framework.Logging": "1.0.0-beta6",
+    "Microsoft.Framework.Logging.Console": "1.0.0-beta6",
+    "Serilog.Framework.Logging": "1.0.0-beta6-10048"
   },
 
   "commands": {
