@@ -6,6 +6,7 @@ using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using Microsoft.Framework.Runtime;
 using MVC6MusicStore.Core.DAL;
+using MVC6MusicStore.Core.DAL.ADO.NET;
 using MVC6MusicStore.Core.Services;
 using MVC6MusicStoreDapper.DataContext;
 using Serilog;
@@ -39,6 +40,9 @@ namespace MVC6MusicStoreDapper
             
             services.AddInstance<IConfiguration>(this.Configuration);
             services.AddScoped<IStoreRepository, StoreRepository>();
+            services.AddScoped<IDatabaseAdapter, DatabaseAdapter>();
+            services.AddScoped<IStoreAdoNetRepository, StoreAdoNetRepository>();
+
             services.AddMvc();
 
             // Logging

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
+using System.Diagnostics;
 using Microsoft.AspNet.Mvc.ModelBinding;
+using MVC6MusicStore.Core.DAL;
 
 namespace MVC6MusicStore.Core.Models
 {
@@ -44,6 +47,21 @@ namespace MVC6MusicStore.Core.Models
         public Album()
         {
             ////OrderDetails = new List<OrderDetail>();
+            Created = DateTime.UtcNow;
+        }
+
+        public Album(IDataReader dataReader)
+        {
+            this.AlbumId = dataReader.GetValue<int>("AlbumId");
+            this.GenreId = dataReader.GetValue<int>("GenreId");
+            this.ArtistId = dataReader.GetValue<int>("ArtistId");
+            this.Title = dataReader.GetValue<string>("Title");
+            this.Price = dataReader.GetValue<decimal>("Price");
+            this.AlbumArtUrl = dataReader.GetValue<string>("AlbumArtUrl");
+
+            this.Genre = new Genre(dataReader);
+            this.Artist = new Artist(dataReader);
+
             Created = DateTime.UtcNow;
         }
     }

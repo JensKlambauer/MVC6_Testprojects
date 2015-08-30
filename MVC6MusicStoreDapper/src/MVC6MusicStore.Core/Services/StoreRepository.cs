@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -15,10 +16,16 @@ namespace MVC6MusicStore.Core.Services
     public sealed class StoreRepository : IStoreRepository
     {
         private readonly ILogger<IStoreRepository> logger;
+
         private readonly string connectionString;
 
         public StoreRepository(IConfiguration configuration, ILogger<IStoreRepository> logger)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException("configuration");
+            }
+
             this.logger = logger;
             this.connectionString = configuration.Get("Data:DefaultConnection:ConnectionString");
         }
@@ -44,7 +51,7 @@ namespace MVC6MusicStore.Core.Services
                     splitOn: "GenreId, ArtistId").ToList();
                 watch.Stop();
 
-                this.logger.LogInformation("SQL query {0} was done in {1} ms.", new object[] { "[dbo].[HoleAlleAlben]", watch.ElapsedMilliseconds});
+                this.logger.LogInformation("SQL query {0} was done in {1} ms.", new object[] { "[dbo].[HoleAlleAlben] Dapper.net", watch.ElapsedMilliseconds});
                 con.Close();
             }
 
@@ -73,7 +80,7 @@ namespace MVC6MusicStore.Core.Services
                 albums = result.ToList();
                 watch.Stop();
 
-                this.logger.LogInformation("SQL query {0} was done in {1} ms.", new object[] { "[dbo].[HoleAlleAlben] Async", watch.ElapsedMilliseconds});
+                this.logger.LogInformation("SQL query {0} was done in {1} ms.", new object[] { "[dbo].[HoleAlleAlben] Dapper.net Async", watch.ElapsedMilliseconds});
                 con.Close();
             }
 
