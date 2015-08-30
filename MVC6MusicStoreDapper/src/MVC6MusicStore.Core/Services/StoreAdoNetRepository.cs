@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Microsoft.Framework.Logging;
 using MVC6MusicStore.Core.DAL.ADO.NET;
 using MVC6MusicStore.Core.Models;
@@ -31,6 +34,25 @@ namespace MVC6MusicStore.Core.Services
                        result.Add(new Album(reader));
                    });
 
+                return result;
+            }
+        }
+
+        public async Task<IEnumerable<Album>> GetAllAlbumsAdoNetAsync()
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+            using (var reader = (SqlDataReader) await this.databaseAdapter.ExecuteReaderAsync(new GetAllAlbumsCommand()))
+            {
+                var result = new List<Album>();
+
+                while (await reader.ReadAsync())
+                {
+                    result.Add(new Album(reader));
+                }
+                watch.Stop();
+
+                this.logger.LogInformation("SQL query {0} was done in {1} ms.", new object[] { "[dbo].[HoleAlleAlben] Ado.Net Async after Reading", watch.ElapsedMilliseconds });
                 return result;
             }
         }

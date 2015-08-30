@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 using System.Transactions;
 
 namespace MVC6MusicStore.Core.DAL.ADO.NET
@@ -26,5 +27,6 @@ namespace MVC6MusicStore.Core.DAL.ADO.NET
         void ExecuteCommands(IEnumerable<SqlCommand> commands, TransactionScopeOption transactionScopeOption);
 
         string CurrentDatabaseName { get; }
+        Task<IDataReader> ExecuteReaderAsync(ISqlCommand sqlCommand);
     }
 }

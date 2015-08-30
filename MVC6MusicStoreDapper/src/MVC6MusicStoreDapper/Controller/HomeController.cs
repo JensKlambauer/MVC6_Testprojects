@@ -16,13 +16,20 @@ namespace MVC6MusicStoreDapper.Controller
             this.storeAdoNetRepository = storeAdoNetRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             ////var albums = await this.storeRepository.GetAllAlbumsDapperAsync();
-            var albums = this.storeRepository.GetAllAlbumsDapper();
-            ////var albums = this.storeAdoNetRepository.GetAllAlbumsAdoNet();
+            var albums = await this.storeAdoNetRepository.GetAllAlbumsAdoNetAsync();
 
             return View();
         }
+
+        ////public IActionResult Index()
+        ////{
+        ////    ////var albums = this.storeRepository.GetAllAlbumsDapper();
+        ////    ////var albums = this.storeAdoNetRepository.GetAllAlbumsAdoNet();
+
+        ////    return View();
+        ////}
     }
 }

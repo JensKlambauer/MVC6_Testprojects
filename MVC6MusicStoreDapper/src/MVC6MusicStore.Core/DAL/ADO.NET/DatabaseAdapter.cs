@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Transactions;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.Logging;
@@ -68,7 +69,49 @@ namespace MVC6MusicStore.Core.DAL.ADO.NET
                 throw;
             }
         }
-      
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The DataReader uses the CloseConnection CommandBehavior.")]
+        public async Task<IDataReader> ExecuteReaderAsync(ISqlCommand sqlCommand)
+        {
+            if (sqlCommand == null)
+            {
+                throw new ArgumentNullException("sqlCommand");
+            }
+
+            var connection = new SqlConnection(this.connectionString);
+
+            try
+            {
+                await connection.OpenAsync().ConfigureAwait(false);
+
+                using (var command = sqlCommand.GetCommand())
+                {
+                    command.Connection = connection;
+
+                    var watch = new Stopwatch();
+                    watch.Start();
+
+                    var reader = await command.ExecuteReaderAsync(CommandBehavior.CloseConnection);
+
+                    watch.Stop();
+                    this.logger.LogInformation("SQL query {0} was done in {1} ms.", new object[] { command.CommandText + " AdoNet Async", watch.ElapsedMilliseconds });
+
+                    return reader;
+                }
+            }
+            catch (Exception exception)
+            {
+                if (connection.State != ConnectionState.Closed)
+                {
+                    connection.Close();
+                }
+
+                this.logger.LogError(exception.Message);
+
+                throw;
+            }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The DataReader uses the CloseConnection CommandBehavior.")]
         public IDataReader ExecuteReader(SqlCommand sqlCommand)
         {
