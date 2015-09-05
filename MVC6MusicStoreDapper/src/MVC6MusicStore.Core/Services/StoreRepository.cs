@@ -27,7 +27,7 @@ namespace MVC6MusicStore.Core.Services
             }
 
             this.logger = logger;
-            this.connectionString = configuration.Get("Data:DefaultConnection:ConnectionString");
+            this.connectionString = configuration["Data:DefaultConnection:ConnectionString"];
         }
 
         public IEnumerable<Album> GetAllAlbumsDapper()

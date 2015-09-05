@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Data.Entity;
+using Microsoft.Dnx.Runtime;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
-using Microsoft.Framework.Runtime;
 using MVC6MusicStore.Core.DAL;
 using MVC6MusicStore.Core.DAL.ADO.NET;
 using MVC6MusicStore.Core.Services;
@@ -31,11 +31,11 @@ namespace MVC6MusicStoreDapper
             services.AddEntityFramework()
                          .AddSqlServer()
                          .AddDbContext<MusicStoreContext>(options =>
-                             options.UseSqlServer(this.Configuration.Get("Data:DefaultConnection:ConnectionString")));
+                             options.UseSqlServer(this.Configuration["Data:DefaultConnection:ConnectionString"]));
 
             services.Configure<DefaultConfiguration>(options =>
             {
-                options.ConnectionString = this.Configuration.Get("Data:DefaultConnection:ConnectionString");
+                options.ConnectionString = this.Configuration["Data:DefaultConnection:ConnectionString"];
             });
             
             services.AddInstance<IConfiguration>(this.Configuration);

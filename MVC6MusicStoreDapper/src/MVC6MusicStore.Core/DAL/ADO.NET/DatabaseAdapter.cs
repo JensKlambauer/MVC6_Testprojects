@@ -24,7 +24,7 @@ namespace MVC6MusicStore.Core.DAL.ADO.NET
                 throw new ArgumentNullException("configuration");
             }
 
-            this.connectionString = configuration.Get("Data:DefaultConnection:ConnectionString");
+            this.connectionString = configuration["Data:DefaultConnection:ConnectionString"];
             this.logger = logger;
         }
         
