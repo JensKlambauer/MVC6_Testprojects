@@ -1,16 +1,13 @@
 ﻿using System.Collections.Generic;
+using System;
+using System.Threading.Tasks;
+using Microsoft.Data.Entity;
+using Microsoft.Framework.DependencyInjection;
+using ManytoMany.Dal;
 using ManytoMany.Models;
-using Microsoft.Data.Entity.Infrastructure;
 
 namespace ManytoMany
 {
-    using System;
-    using System.Threading.Tasks;
-    using Dal;
-    using Microsoft.Data.Entity;
-    using Microsoft.Framework.DependencyInjection;
-    using System.Linq;
-
     public static class SampleData
     {
         public static async Task InitializeIdentityDatabaseAsync(IServiceProvider serviceProvider)
