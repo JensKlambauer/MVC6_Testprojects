@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7E983A72-D46A-43E9-9142-1B6D85CD043D}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		NuGet.config = NuGet.config
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ManytoMany", "src\ManytoMany\ManytoMany.xproj", "{E1D09046-FD39-480A-927B-DB170CE2A447}"

@@ -7,10 +7,10 @@
   "licenseUrl": "",
 
   "dependencies": {
-    "EntityFramework.InMemory": "7.0.0-beta7",
-    "Microsoft.AspNet.Mvc": "6.0.0-beta7",
-    "Microsoft.Framework.Logging.Testing": "1.0.0-beta7",
-    "xunit.runner.aspnet": "2.0.0-aspnet-beta7",
+    "EntityFramework.InMemory": "7.0.0-beta8",
+    "Microsoft.AspNet.Mvc": "6.0.0-beta8",
+    "Microsoft.Framework.Logging.Testing": "1.0.0-beta8",
+    "xunit.runner.aspnet": "2.0.0-aspnet-beta8",
     "ManytoMany": "1.0.0-*"
   },
    "commands": {

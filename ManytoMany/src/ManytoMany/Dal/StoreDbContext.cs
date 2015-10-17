@@ -16,18 +16,18 @@ namespace ManytoMany.Dal
         {
             builder.Entity<Photo>(e =>
             {
-                e.Key(k => k.Id);
+                e.HasKey(k => k.Id);
                 e.Property(a => a.Id).ValueGeneratedNever();
             });
             builder.Entity<Person>(e =>
             {
-                e.Key(k => k.Id);
+                e.HasKey(k => k.Id);
                 e.Property(a => a.Id).ValueGeneratedNever();
             });
 
             builder.Entity<PersonPhoto>(e =>
             {
-                e.Key(x => new { x.PhotoId, x.PersonId });
+                e.HasKey(x => new { x.PhotoId, x.PersonId });
                 ////e.Reference(a => a.Person).InverseCollection(p => p.PersonPhotos).ForeignKey(d => d.PersonId);
                 ////e.Reference(a => a.Photo).InverseCollection(p => p.PersonPhotos).ForeignKey(d => d.PhotoId);
             });
