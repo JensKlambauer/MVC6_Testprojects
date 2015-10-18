@@ -19,7 +19,6 @@ namespace ManytoMany
         {
             var builder = new ConfigurationBuilder().SetBasePath(applicationEnvironment.ApplicationBasePath).AddJsonFile("config.json").AddEnvironmentVariables(); 
             this.Configuration = builder.Build();
-            Configuration = builder.Build();
         }
         public void ConfigureServices(IServiceCollection services)
         {

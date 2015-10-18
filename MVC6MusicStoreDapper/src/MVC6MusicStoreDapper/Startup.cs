@@ -20,7 +20,7 @@ namespace MVC6MusicStoreDapper
 
         public Startup(IApplicationEnvironment env)
         {
-            var builder = new ConfigurationBuilder(env.ApplicationBasePath).AddJsonFile("config.json").AddEnvironmentVariables();
+            var builder = new ConfigurationBuilder().SetBasePath(env.ApplicationBasePath).AddJsonFile("config.json").AddEnvironmentVariables();
             this.Configuration = builder.Build();
         }
 
@@ -53,17 +53,17 @@ namespace MVC6MusicStoreDapper
         {
             loggerfactory.AddSerilog(GetLoggerConfiguration());
 
-            app.UseErrorPage()
-            .UseStaticFiles()
-            .UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "Home", action = "Index" });
-            });
+            app.UseDatabaseErrorPage()
+                .UseStaticFiles()
+                .UseMvc(routes =>
+                {
+                    routes.MapRoute(
+                        name: "default",
+                        template: "{controller}/{action}/{id?}",
+                        defaults: new { controller = "Home", action = "Index" });
+                });
 
-            //Populates the MusicStore sample data
+            // Populates the MusicStore sample data
             SampleData.InitializeMusicStoreDatabaseAsync(app.ApplicationServices).Wait();
         }
 
@@ -71,7 +71,7 @@ namespace MVC6MusicStoreDapper
         {
             return new LoggerConfiguration()
                         .MinimumLevel.Debug()
-                        .WriteTo.RollingFile(@"C:\Temp\DapperMVC6-{Date}.txt",outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} {Level}:{EventId} [{SourceContext}] {Message}{NewLine}{Exception}")
+                        .WriteTo.RollingFile(@"C:\Temp\DapperMVC6-{Date}.txt", outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} {Level}:{EventId} [{SourceContext}] {Message}{NewLine}{Exception}")
                         .WriteTo.ColoredConsole()
                         .CreateLogger();
         }

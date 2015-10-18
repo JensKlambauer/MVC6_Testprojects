@@ -31,7 +31,7 @@
     "gen": "Microsoft.Framework.CodeGeneration",
     "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:7004",
     "ef": "EntityFramework.Commands",
-    "web": "Microsoft.AspNet.Server.Kestrel"
+    "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:7002"
   },
 
    "frameworks": {
