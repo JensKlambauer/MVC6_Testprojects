@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Data.Entity;
-using Microsoft.Framework.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using MVC6MusicStore.Core.Models;
 using MVC6MusicStoreDapper.DataContext;
 
@@ -15,11 +15,13 @@ namespace MVC6MusicStoreDapper
 
         public static async Task InitializeMusicStoreDatabaseAsync(IServiceProvider serviceProvider, bool createUsers = true)
         {
-            using (var db = serviceProvider.GetService<MusicStoreContext>())
+            using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
+                var db = serviceScope.ServiceProvider.GetService<MusicStoreContext>();
+
                 if (await db.Database.EnsureCreatedAsync())
                 {
-                    await InsertTestData(serviceProvider);
+                    await InsertTestData(serviceProvider);                    
                 }
             }
         }
@@ -33,7 +35,6 @@ namespace MVC6MusicStoreDapper
             await AddOrUpdateAsync(serviceProvider, a => a.AlbumId, albums);
         }
 
-        // TODO [EF] This may be replaced by a first class mechanism in EF
         private static async Task AddOrUpdateAsync<TEntity>(
             IServiceProvider serviceProvider,
             Func<TEntity, object> propertyToMatch, IEnumerable<TEntity> entities)
@@ -41,13 +42,15 @@ namespace MVC6MusicStoreDapper
         {
             // Query in a separate context so that we can attach existing entities as modified
             List<TEntity> existingData;
-            using (var db = serviceProvider.GetService<MusicStoreContext>())
+            using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
+                var db = serviceScope.ServiceProvider.GetService<MusicStoreContext>();
                 existingData = db.Set<TEntity>().ToList();
             }
 
-            using (var db = serviceProvider.GetService<MusicStoreContext>())
+            using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
+                var db = serviceScope.ServiceProvider.GetService<MusicStoreContext>();
                 foreach (var item in entities)
                 {
                     db.Entry(item).State = existingData.Any(g => propertyToMatch(g).Equals(propertyToMatch(item)))
@@ -58,7 +61,6 @@ namespace MVC6MusicStoreDapper
                 await db.SaveChangesAsync();
             }
         }
-       
 
         private static Album[] GetAlbums(string imgUrl, Dictionary<string, Genre> genres, Dictionary<string, Artist> artists)
         {

@@ -1,16 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Data.Common;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using Microsoft.Framework.Logging;
-using MVC6MusicStore.Core.DAL.ADO.NET;
-using MVC6MusicStore.Core.Models;
-using MVC6MusicStore.Core.DAL;
-using MVC6MusicStore.Core.SqlCommands;
-
-namespace MVC6MusicStore.Core.Services
+﻿namespace MVC6MusicStore.Core.Services
 {
+    using System.Collections.Generic;
+    using System.Data.Common;
+    using System.Data.SqlClient;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
+
+    using Microsoft.Extensions.Logging;
+
+    using MVC6MusicStore.Core.DAL;
+    using MVC6MusicStore.Core.DAL.ADO.NET;
+    using MVC6MusicStore.Core.Models;
+    using MVC6MusicStore.Core.SqlCommands;
+
     public sealed class StoreAdoNetRepository : IStoreAdoNetRepository
     {
         private readonly IDatabaseAdapter databaseAdapter;

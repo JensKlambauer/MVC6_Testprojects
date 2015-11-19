@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Transactions;
-using Microsoft.Framework.Configuration;
-using Microsoft.Framework.Logging;
-
-namespace MVC6MusicStore.Core.DAL.ADO.NET
+﻿namespace MVC6MusicStore.Core.DAL.ADO.NET
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.SqlClient;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Transactions;
+
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Logging;
+
     public sealed class DatabaseAdapter : IDatabaseAdapter
     {
         private readonly ILogger<IDatabaseAdapter> logger;

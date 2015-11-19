@@ -1,19 +1,23 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.Data.Entity;
-using Microsoft.Dnx.Runtime;
-using Microsoft.Framework.Configuration;
-using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.Logging;
-using MVC6MusicStore.Core.DAL;
-using MVC6MusicStore.Core.DAL.ADO.NET;
-using MVC6MusicStore.Core.Services;
-using MVC6MusicStoreDapper.DataContext;
-using Serilog;
-using ILogger = Serilog.ILogger;
-
-namespace MVC6MusicStoreDapper
+﻿namespace MVC6MusicStoreDapper
 {
+    using Microsoft.AspNet.Builder;
+    using Microsoft.AspNet.Hosting;
+    using Microsoft.Data.Entity;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.PlatformAbstractions;
+
+    using MVC6MusicStore.Core.DAL;
+    using MVC6MusicStore.Core.DAL.ADO.NET;
+    using MVC6MusicStore.Core.Services;
+
+    using MVC6MusicStoreDapper.DataContext;
+
+    using Serilog;
+
+    using ILogger = Serilog.ILogger;
+
     public class Startup
     {
         private IConfiguration Configuration { get; }

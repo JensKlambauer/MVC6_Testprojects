@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using Microsoft.Framework.Configuration;
-using MVC6MusicStore.Core.Models;
-using Dapper;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Framework.Logging;
-
-namespace MVC6MusicStore.Core.Services
+﻿namespace MVC6MusicStore.Core.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.SqlClient;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Dapper;
+
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Logging;
+
+    using MVC6MusicStore.Core.Models;
+
     public sealed class StoreRepository : IStoreRepository
     {
         private readonly ILogger<IStoreRepository> logger;

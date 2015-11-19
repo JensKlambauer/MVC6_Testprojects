@@ -7,8 +7,8 @@
   "licenseUrl": "",
 
   "dependencies": {
-    "Microsoft.AspNet.Mvc": "6.0.0-beta8",
-    "EntityFramework.SqlServer": "7.0.0-beta8"
+    "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
+    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final"
   },
 
   "frameworks": {
