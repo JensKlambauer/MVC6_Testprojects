@@ -1,16 +1,15 @@
-﻿using System;
-using ManytoMany.Dal;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Diagnostics.Entity;
-using Microsoft.CodeAnalysis;
-using Microsoft.Data.Entity;
-using Microsoft.Framework.Configuration;
-using Microsoft.Framework.DependencyInjection;
-using Microsoft.Dnx.Runtime;
-using Microsoft.Framework.Logging;
-
-namespace ManytoMany
+﻿namespace ManytoMany
 {
+    using ManytoMany.Dal;
+
+    using Microsoft.AspNet.Builder;
+    using Microsoft.AspNet.Diagnostics.Entity;
+    using Microsoft.Data.Entity;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.PlatformAbstractions;
+
     public class Startup
     {
         private IConfiguration Configuration { get; }
@@ -47,8 +46,8 @@ namespace ManytoMany
             SampleData.InitializeIdentityDatabaseAsync(app.ApplicationServices).Wait();
         }
 
-        //This method is invoked when ASPNET_ENV is 'Development' or is not defined
-        //The allowed values are Development,Staging and Production
+        // This method is invoked when ASPNET_ENV is 'Development' or is not defined
+        // The allowed values are Development,Staging and Production
         public void ConfigureDevelopment(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(minLevel: LogLevel.Warning);
@@ -60,7 +59,7 @@ namespace ManytoMany
             // During development use the ErrorPage middleware to display error information in the browser
             app.UseDeveloperExceptionPage();
 
-            app.UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
+            app.UseDatabaseErrorPage();
 
             // Add the runtime information page that can be used by developers
             // to see what packages are used by the application

@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.Data.Entity;
-using Microsoft.Framework.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using ManytoMany.Dal;
 using ManytoMany.Models;
 

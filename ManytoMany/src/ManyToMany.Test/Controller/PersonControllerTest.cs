@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
-using Microsoft.Framework.Caching.Memory;
-using Microsoft.Framework.DependencyInjection;
-using Xunit;
-using ManytoMany.Dal;
-using ManytoMany.Models;
-using ManytoMany.Controller;
-
-namespace ManyToMany.Test.Controller
+﻿namespace ManyToMany.Test.Controller
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using ManytoMany.Controller;
+    using ManytoMany.Dal;
+    using ManytoMany.Models;
+
+    using Microsoft.AspNet.Mvc;
+    using Microsoft.Data.Entity;
+    using Microsoft.Extensions.Caching.Memory;
+    using Microsoft.Extensions.DependencyInjection;
+
+    using Xunit;
+
     public class PersonControllerTest
     {
         private readonly IServiceProvider serviceProvider;
