@@ -4,7 +4,7 @@
 		},		
 		"Data": {
 				"DefaultConnection": {
-					"ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=MvcDapper;Trusted_Connection=True;MultipleActiveResultSets=True;"
+					"ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=Mvc6Dapper;Trusted_Connection=True;MultipleActiveResultSets=True;"
 				}
 		}
 }
