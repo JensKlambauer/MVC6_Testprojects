@@ -20,11 +20,11 @@
 
     public class Startup
     {
-        private IConfiguration Configuration { get; }
+        private IConfigurationRoot Configuration { get; }
 
         public Startup(IApplicationEnvironment env)
         {
-            var builder = new ConfigurationBuilder().SetBasePath(env.ApplicationBasePath).AddJsonFile("config.json").AddEnvironmentVariables();
+            var builder = new ConfigurationBuilder().AddJsonFile("config.json").AddEnvironmentVariables();
             this.Configuration = builder.Build();
         }
 

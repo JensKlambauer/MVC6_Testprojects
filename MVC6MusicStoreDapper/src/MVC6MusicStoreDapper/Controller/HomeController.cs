@@ -18,8 +18,8 @@ namespace MVC6MusicStoreDapper.Controller
 
         public async Task<IActionResult> Index()
         {
-            ////var albums = await this.storeRepository.GetAllAlbumsDapperAsync();
-            var albums = await this.storeAdoNetRepository.GetAllAlbumsAdoNetAsync();
+            var albums = await this.storeRepository.GetAllAlbumsDapperAsync();
+            ////var albums = await this.storeAdoNetRepository.GetAllAlbumsAdoNetAsync();
 
             return View();
         }

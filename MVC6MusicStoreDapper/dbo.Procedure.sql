@@ -1,4 +1,7 @@
-﻿CREATE PROC [dbo].[HoleAlleAlben]
+﻿USE [Mvc6Dapper]
+GO
+
+CREATE PROC [dbo].[HoleAlleAlben]
 AS 	
 	SELECT [Album].[AlbumId],[Album].[Title],[Album].[GenreId],[Album].[ArtistId],[Album].[Price],[Album].[AlbumArtUrl],
 		    [Genre].[GenreId], [Genre].[Name], [Genre].[Description],

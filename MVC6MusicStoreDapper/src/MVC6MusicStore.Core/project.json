@@ -8,14 +8,13 @@
 
   "dependencies": {
     "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
-    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final"
+    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
+    "Dapper": "1.50.0-beta5"
   },
 
   "frameworks": {
     "dnx451": {
       "dependencies": {
-       "Dapper": "1.42.0",
-       "DapperExtensions": "1.4.4"
       }
     }
   }
