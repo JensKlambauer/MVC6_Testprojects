@@ -12,11 +12,11 @@
 
     public class Startup
     {
-        private IConfiguration Configuration { get; }
+        private IConfigurationRoot Configuration { get; }
 
         public Startup(IApplicationEnvironment applicationEnvironment)
         {
-            var builder = new ConfigurationBuilder().SetBasePath(applicationEnvironment.ApplicationBasePath).AddJsonFile("config.json").AddEnvironmentVariables(); 
+            var builder = new ConfigurationBuilder().AddJsonFile("config.json").AddEnvironmentVariables(); 
             this.Configuration = builder.Build();
         }
         public void ConfigureServices(IServiceCollection services)
@@ -32,7 +32,7 @@
 
         public void Configure(IApplicationBuilder app)
         {
-            ////app.UseWelcomePage();
+            ////app.UseIISPlatformHandler();
             app.UseStaticFiles()
               .UseMvc(routes =>
               {

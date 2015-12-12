@@ -8,9 +8,7 @@
     "Microsoft.AspNet.Session": "1.0.0-rc1-final",
     "Microsoft.AspNet.Identity": "3.0.0-rc1-final",
     "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
-    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
-    "EntityFramework.Commands": "7.0.0-rc1-final",
-    "Microsoft.AspNet.Server.IIS": "1.0.0-*",
+    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
     "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
     "Microsoft.AspNet.Server.WebListener": "1.0.0-rc1-final",
     "Microsoft.AspNet.Antiforgery": "1.0.0-rc1-final",
@@ -23,7 +21,9 @@
     "Microsoft.Extensions.Configuration.CommandLine": "1.0.0-rc1-final",
     "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc1-final",
     "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final"
+    "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
+    "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
+    "EntityFramework.Commands": "7.0.0-rc1-final"
   },
 
   "commands": {
@@ -38,7 +38,7 @@
     "dnx451": { },
     "dnxcore50": {
       "dependencies": {
-        "System.Runtime.Serialization.Primitives": "4.0.11-beta-23409"
+        "System.Runtime.Serialization.Primitives": "4.1.0-beta-23516"
       }
     }
   }
